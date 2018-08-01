@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas {
+            position: absolute;
+            top: 0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="text" width="250" height="100"></canvas>
+<canvas id="gua" width="250" height="100"></canvas>
+
+
+<script>
+
+    var gua = document.querySelector('#gua');
+    var text = document.querySelector('#text');
+
+    var textCtx = text.getContext('2d');
+
+    textCtx.beginPath();
+    textCtx.fillStyle = 'red';
+    textCtx.rect(0,0,250,100);
+    textCtx.fill();
+    textCtx.closePath();
+
+    var arr = ['欧洲十日游','￥5000000.00元','谢谢惠顾'];
+
+    var random = Math.floor(Math.random() * arr.length);
+
+    textCtx.beginPath();
+    textCtx.font = '25px 微软雅黑';
+    textCtx.textAlign = 'center';
+    textCtx.fillStyle = 'yellow';
+    textCtx.fillText(arr[random],125,55);
+    textCtx.closePath();
+
+
+
+    var guaCtx = gua.getContext('2d');
+
+
+    guaCtx.beginPath();
+    guaCtx.rect(0,0,250,100);
+    guaCtx.fillStyle = '#ccc';
+    guaCtx.fill();
+    guaCtx.closePath();
+
+
+    gua.addEventListener('mousemove',function (e) {
+//        在鼠标的位置画圆
+        guaCtx.beginPath();
+        guaCtx.globalCompositeOperation = 'destination-out';
+        guaCtx.arc(e.offsetX,e.offsetY,20,0,2*Math.PI,false);
+        guaCtx.fill();
+        guaCtx.closePath();
+    })
+
+
+</script>
+</body>
+</html>
